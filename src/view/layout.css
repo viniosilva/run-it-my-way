@@ -1,0 +1,95 @@
+body {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: dimgrey;
+  color: white;
+  height: 100vh;
+
+  & > header {
+    margin: 0 2rem;
+    padding: 2rem 0 1rem;
+    border-bottom: 1px solid white;
+  }
+
+  & > main {
+    flex: 1;
+    display: flex;
+    overflow-y: auto;
+
+    & > ul {
+      flex: 1;
+      scroll-behavior: smooth;
+    }
+  }
+}
+
+#commands {
+  margin: 0 2rem;
+  padding: 1rem 0 2rem;
+  border-top: 1px solid white;
+
+  display: flex;
+  justify-content: flex-end;
+  column-gap: 2rem;
+
+  & > .menu::before {
+    content: "\2630";
+    padding-right: 0.25rem;
+  }
+
+  & > .choose::before {
+    content: "< >";
+    padding-right: 0.25rem;
+  }
+
+  & > .select::before {
+    content: "\2423";
+    padding-right: 0.25rem;
+  }
+
+  & > .options::before {
+    content: "\21E7";
+    padding-right: 0.25rem;
+  }
+
+  & > .back::before {
+    content: "\2190";
+    padding-right: 0.25rem;
+  }
+}
+
+#menu {
+  position: fixed;
+  width: 50%;
+  margin-right: auto;
+  top: -25%;
+  left: 25%;
+  padding: 2rem;
+  background: tan;
+  color: black;
+  z-index: 10;
+  transition: 0.1s;
+
+  & > ul li {
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+
+      & > span {
+        color: indianred;
+
+        &::before {
+          content: "";
+          border-left: 0.5rem solid indianred;
+          padding-right: 1rem;
+        }
+      }
+    }
+  }
+
+  &.show {
+    top: 25%;
+  }
+}

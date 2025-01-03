@@ -1,0 +1,40 @@
+#collections > ul {
+  display: grid;
+  grid-gap: 2rem;
+  align-items: center;
+  padding: 0 32rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+
+  & li {
+    grid-row: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    row-gap: 0.5rem;
+    background: indianred;
+    padding: 1rem 2rem;
+    width: 32rem;
+    height: 32rem;
+    transition: 0.1s;
+
+    & > img {
+      width: 16rem;
+    }
+
+    & > span {
+      font-size: 1.5rem;
+      text-align: center;
+    }
+
+    &:focus {
+      background: white;
+      outline: none;
+
+      & > span {
+        color: black;
+      }
+    }
+  }
+}

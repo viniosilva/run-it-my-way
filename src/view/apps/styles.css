@@ -1,0 +1,67 @@
+#apps > ul {
+  padding: 1rem 2rem 0;
+
+  li {
+    padding-left: 1rem;
+
+    & > span {
+      font-size: 1.5rem;
+      text-align: center;
+    }
+
+    &:focus {
+      outline: none;
+
+      & > span {
+        color: indianred;
+
+        &::before {
+          content: "";
+          border-left: 0.5rem solid indianred;
+          padding-right: 1rem;
+        }
+      }
+    }
+  }
+}
+
+#options {
+  position: fixed;
+  width: 50%;
+  margin-right: auto;
+  top: -25%;
+  left: 25%;
+  padding: 2rem;
+  background: tan;
+  color: black;
+  z-index: 10;
+  transition: 0.1s;
+
+  & > ul li {
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+
+      & > span {
+        color: indianred;
+
+        &::before {
+          content: "";
+          border-left: 0.5rem solid indianred;
+          padding-right: 1rem;
+        }
+      }
+    }
+
+    /* &::after {
+      content: "\2605";
+      color: yellow;
+      padding-left: 0.5rem;
+    } */
+  }
+
+  &.show {
+    top: 25%;
+  }
+}

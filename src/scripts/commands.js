@@ -23,6 +23,7 @@ const keyboardMap = {
   ArrowRight: COMMAND.RIGHT,
 
   " ": COMMAND.SELECT,
+  Enter: COMMAND.SELECT,
   Backspace: COMMAND.BACK,
 
   Escape: COMMAND.MENU,

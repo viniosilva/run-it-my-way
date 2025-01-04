@@ -3,19 +3,17 @@ class CollectionScreen {
   mapCommandsUp = {
     [COMMAND.MENU]: () => this.menuContainer.activate(),
     [COMMAND.LEFT]: () => {
-      const item = focusItem(
-        Array.from(document.querySelectorAll("#collections > ul li")),
-        -1,
-        false
+      const items = Array.from(
+        document.querySelectorAll("#collections > ul li")
       );
+      const item = focusItem(items, -1);
       this.tabindex = item.getAttribute("tabindex");
     },
     [COMMAND.RIGHT]: () => {
-      const item = focusItem(
-        Array.from(document.querySelectorAll("#collections > ul li")),
-        1,
-        false
+      const items = Array.from(
+        document.querySelectorAll("#collections > ul li")
       );
+      const item = focusItem(items, 1);
       this.tabindex = item.getAttribute("tabindex");
     },
     [COMMAND.SELECT]: () => {

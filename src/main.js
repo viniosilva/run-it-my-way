@@ -19,12 +19,6 @@ async function createWindow() {
     },
   });
 
-  win.loadFile("src/view/collections/index.html");
-  win.once("ready-to-show", () => {
-    win.setFullScreen(true);
-    // win.webContents.openDevTools();
-  });
-
   await prepareFolders();
 
   vars.groups = await readGroups();
@@ -32,6 +26,12 @@ async function createWindow() {
   vars.apps = await readApps();
   vars.settings = await readSettings();
   vars.win = win;
+
+  win.loadFile("src/view/collections/index.html");
+  win.once("ready-to-show", () => {
+    win.setFullScreen(true);
+    // win.webContents.openDevTools();
+  });
 }
 
 app.on("ready", () => {

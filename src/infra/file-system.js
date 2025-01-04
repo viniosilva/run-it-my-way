@@ -1,9 +1,7 @@
 const electron = require("electron");
-const http = require("http");
-const https = require("https");
 const fs = require("fs");
-const fsAsync = require("fs/promises");
 const path = require("node:path");
+const zip = new require("jszip");
 
 const rootPath = electron.app.getAppPath();
 
@@ -11,83 +9,100 @@ const dataFolder = path.join(rootPath, "data");
 const groupsFolder = path.join(dataFolder, "groups");
 const appsFolder = path.join(dataFolder, "apps");
 
+function getRootPath() {
+  return rootPath;
+}
+
 async function prepareFolders() {
-  if (!(await exists(dataFolder))) {
-    await fsAsync.mkdir(dataFolder);
-  }
-  if (!(await exists(groupsFolder))) {
-    await fsAsync.mkdir(groupsFolder);
-  }
-  if (!(await exists(appsFolder))) {
-    await fsAsync.mkdir(appsFolder);
-  }
+  await Promise.all([
+    fs.promises.mkdir(dataFolder, { recursive: true }),
+    fs.promises.mkdir(groupsFolder, { recursive: true }),
+    fs.promises.mkdir(appsFolder, { recursive: true }),
+  ]);
 }
 
 async function readGroups() {
-  const contents = await fsAsync.readdir(groupsFolder);
-  const groups = await Promise.all(
-    contents.map(async (content) =>
-      JSON.parse(
-        await fsAsync.readFile(path.join(groupsFolder, content), "utf-8")
-      )
-    )
-  );
+  const contents = await fs.promises.readdir(groupsFolder);
+  const groups = [];
+
+  for (const content of contents) {
+    const file = await fs.promises.readFile(
+      path.join(groupsFolder, content),
+      "utf-8"
+    );
+
+    const groupObj = JSON.parse(file);
+    groups.push(groupObj);
+  }
 
   return groups.sort((a, b) => a.id - b.id);
 }
 
 async function readApps() {
-  const dirs = await fsAsync.readdir(appsFolder);
-  const apps = await Promise.all(
-    dirs.map(async (dir2) => {
-      const contents = await fsAsync.readdir(path.join(appsFolder, dir2));
-      return await Promise.all(
-        contents.map(async (content) =>
-          JSON.parse(
-            await fsAsync.readFile(
-              path.join(appsFolder, dir2, content),
-              "utf-8"
-            )
-          )
-        )
+  const dirs = await fs.promises.readdir(appsFolder);
+  const apps = [];
+
+  for (const dir of dirs) {
+    const contents = await fs.promises.readdir(path.join(appsFolder, dir));
+
+    for (const content of contents) {
+      const file = await fs.promises.readFile(
+        path.join(appsFolder, dir, content),
+        "utf-8"
       );
-    })
-  );
+
+      const appObj = JSON.parse(file);
+      apps.push(appObj);
+    }
+  }
 
   return apps.flatMap((v) => v).sort((a, b) => a.id - b.id);
 }
 
 async function readSettings() {
-  return JSON.parse(
-    await fsAsync.readFile(path.join(dataFolder, "settings.json"), "utf-8")
+  const file = await fs.promises.readFile(
+    path.join(dataFolder, "settings.json"),
+    "utf-8"
   );
+
+  return JSON.parse(file);
 }
 
 async function writeApp(app) {
   const name = normalizeString(app.name);
-  const filePath = path.join(appsFolder, getLetterFolder(name), `${name}.json`);
-  await fsAsync.writeFile(filePath, JSON.stringify(app, null, "  "));
+  const letter = getLetterFolder(name);
+  const filePath = path.join(appsFolder, letter, `${name}.json`);
+
+  await fs.promises.writeFile(filePath, JSON.stringify(app, null, "  "));
 }
 
-function getRootPath() {
-  return rootPath;
-}
+async function exists(pathfile, opts) {
+  const dir = pathfile.split("/").slice(0, -1).join("/");
 
-async function exists(path) {
-  try {
-    await fsAsync.access(path);
-    return true;
-  } catch (_) {
-    return false;
+  let filename = pathfile.split("/").pop();
+  if (opts.withoutExt) {
+    filename = filename.split(".").slice(0, -1).join(".") + ".";
   }
-}
 
-function getLinkFilename(link) {
-  return link.split("/").pop();
+  let found = false;
+  const contents = await fs.promises.readdir(dir);
+  for (const content of contents) {
+    const curFilename = content.split("/").pop();
+
+    if (curFilename.startsWith(filename)) {
+      found = true;
+      break;
+    }
+  }
+
+  return found;
 }
 
 function normalizeString(value) {
-  return decodeURI(value).toLowerCase().replaceAll(" ", "_").replace("'", "'");
+  return decodeURI(value)
+    .toLowerCase()
+    .replaceAll(" ", "_")
+    .replace("'", "\\'");
 }
 
 function getLetterFolder(value) {
@@ -96,28 +111,30 @@ function getLetterFolder(value) {
   return /[a-zA-Z]/.test(letter) ? letter : "#";
 }
 
-function download(link, filePath) {
-  return new Promise((resolve, reject) => {
-    const file = fs.createWriteStream(filePath);
-    fetch(link)
-      .then((res) => res.blob())
-      .then((blob) => blob.arrayBuffer())
-      .then((buffer) => file.write(Buffer.from(buffer)))
-      .then(() => resolve())
-      .catch((err) => reject(err));
-  });
+async function download(link, filePath) {
+  const file = fs.createWriteStream(filePath);
+
+  const res = await fetch(link);
+  const blob = await res.blob();
+  const buffer = await blob.arrayBuffer();
+
+  file.write(Buffer.from(buffer));
 }
 
-function unzip(filePath, type) {
-  return new Promise((resolve, reject) => {
-    const file = fs.createWriteStream(filePath);
-    fetch(link)
-      .then((res) => res.blob())
-      .then((blob) => blob.arrayBuffer())
-      .then((buffer) => file.write(Buffer.from(buffer)))
-      .then(() => resolve())
-      .catch((err) => reject(err));
-  });
+async function unzip(filePath) {
+  const data = await fs.promises.readFile(filePath);
+
+  const { files } = await zip.loadAsync(data);
+  const file = Object.values(files).shift();
+  const buffer = await file.async("nodebuffer");
+
+  const dir = filePath.split("/").slice(0, -1).join("/");
+  const filename = normalizeString(file.name);
+  const unzipFilePath = path.join(dir, filename);
+
+  await fs.promises.writeFile(unzipFilePath, buffer);
+
+  return unzipFilePath;
 }
 
 module.exports = {
@@ -128,8 +145,8 @@ module.exports = {
   writeApp,
   getRootPath,
   exists,
-  getLinkFilename,
   normalizeString,
   getLetterFolder,
   download,
+  unzip,
 };

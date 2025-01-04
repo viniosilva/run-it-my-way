@@ -13,35 +13,23 @@ class AppScreen {
 
   mapCommandsDown = {
     [COMMAND.UP]: () => {
-      const item = focusItem(
-        Array.from(document.querySelectorAll("#apps > ul li")),
-        -1,
-        true
-      );
+      const items = Array.from(document.querySelectorAll("#apps > ul li"));
+      const item = focusItemList(items, -1);
       this.tabindex = item.getAttribute("tabindex");
     },
     [COMMAND.DOWN]: () => {
-      const item = focusItem(
-        Array.from(document.querySelectorAll("#apps > ul li")),
-        1,
-        true
-      );
+      const items = Array.from(document.querySelectorAll("#apps > ul li"));
+      const item = focusItemList(items, 1);
       this.tabindex = item.getAttribute("tabindex");
     },
     [COMMAND.LEFT]: () => {
-      const item = focusItem(
-        Array.from(document.querySelectorAll("#apps > ul li")),
-        -10,
-        true
-      );
+      const items = Array.from(document.querySelectorAll("#apps > ul li"));
+      const item = focusItemList(items, -10);
       this.tabindex = item.getAttribute("tabindex");
     },
     [COMMAND.RIGHT]: () => {
-      const item = focusItem(
-        Array.from(document.querySelectorAll("#apps > ul li")),
-        10,
-        true
-      );
+      const items = Array.from(document.querySelectorAll("#apps > ul li"));
+      const item = focusItemList(items, 10);
       this.tabindex = item.getAttribute("tabindex");
     },
   };
@@ -120,19 +108,13 @@ class OptionsContainer {
       window.app.loadCollections();
     },
     [COMMAND.UP]: () => {
-      const item = focusItem(
-        Array.from(document.querySelectorAll("#options > ul li")),
-        -1,
-        true
-      );
+      const items = Array.from(document.querySelectorAll("#options > ul li"));
+      const item = focusItemList(items, -1);
       this.tabindex = item.getAttribute("tabindex");
     },
     [COMMAND.DOWN]: () => {
-      const item = focusItem(
-        Array.from(document.querySelectorAll("#options > ul li")),
-        1,
-        true
-      );
+      const items = Array.from(document.querySelectorAll("#options > ul li"));
+      const item = focusItemList(items, 1);
       this.tabindex = item.getAttribute("tabindex");
     },
   };
@@ -146,7 +128,7 @@ class OptionsContainer {
 
     let tabindex = 1;
     const container = document.getElementById("options");
-    container.innerHTML = "";
+    container.innerHTML = `<h2>OPTIONS</h2>`;
     const ul = document.createElement("ul");
     container.appendChild(ul);
 

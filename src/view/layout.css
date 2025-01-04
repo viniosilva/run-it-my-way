@@ -70,6 +70,13 @@ body {
   color: black;
   z-index: 10;
   transition: 0.1s;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+
+  & > h2 {
+    font-size: 1rem;
+  }
 
   & > ul li {
     cursor: pointer;

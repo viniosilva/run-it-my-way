@@ -23,6 +23,7 @@ class MenuContainer {
   buildComponent() {
     let tabindex = 1;
     const menu = document.getElementById("menu");
+    menu.innerHTML = `<h2>MENU</h2>`;
     const ul = document.createElement("ul");
     menu.appendChild(ul);
 

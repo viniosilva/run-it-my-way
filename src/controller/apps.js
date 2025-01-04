@@ -1,15 +1,15 @@
 const { exec } = require("child_process");
-const fs = require("fs/promises");
+const fs = require("fs");
 const path = require("node:path");
 const { vars } = require("../global");
 const {
-  getLinkFilename,
   normalizeString,
   getLetterFolder,
   getRootPath,
   download,
   writeApp,
   exists,
+  unzip,
 } = require("../infra/file-system");
 
 function getApps() {
@@ -18,17 +18,13 @@ function getApps() {
   );
 }
 
-function getAppById(e, id) {
+function getAppById(_, id) {
   return vars.apps.find((app) => app.id === id);
 }
 
-function run(e, appId) {
+function run(_, appId) {
   const app = vars.apps.find(({ id }) => id === appId);
-  try {
-    exec(encodeCommand(app.cmd));
-  } catch (err) {
-    throw err;
-  }
+  exec(encodeCommand(app.cmd));
 }
 
 function encodeCommand(value) {
@@ -38,25 +34,26 @@ function encodeCommand(value) {
     .replaceAll("'", "\\'");
 }
 
-async function importApp(e, appId, link) {
+async function importApp(_, appId, link) {
   try {
-    const linkFilename = normalizeString(getLinkFilename(link));
-    const letterPath = path.join(
-      getRootPath(),
-      "data/files",
-      getLetterFolder(linkFilename)
-    );
-    const filePath = path.join(letterPath, linkFilename);
+    const linkFilename = link.split("/").pop();
+    const filename = normalizeString(linkFilename);
+    const letter = getLetterFolder(filename);
+    const letterPath = path.join(getRootPath(), "data/files", letter);
+    let filePath = path.join(letterPath, filename);
 
     const app = vars.apps.find(({ id }) => id === appId);
     const settings = getAppSettingsByCollection(app);
     if (!settings) return;
 
-    if (!(await exists(filePath))) {
-      await fs.mkdir(letterPath, { recursive: true });
+    if (!(await exists(filePath, { withoutExt: true }))) {
+      await fs.promises.mkdir(letterPath, { recursive: true });
       await download(link, filePath);
+
       if (settings.unzip) {
-        await unzip(filePath, setting.unzip)
+        const zipFile = await unzip(filePath);
+        await fs.promises.rm(filePath);
+        filePath = zipFile;
       }
     }
 

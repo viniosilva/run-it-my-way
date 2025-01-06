@@ -9,10 +9,11 @@ async function main() {
   console.log("starting");
   const data = [];
 
-  for (const {name, url} of Object.values(linksJson)) {
+  for (const { name, tag, url } of Object.values(linksJson)) {
     console.log(`getting ${name}`);
     const p = {
       name: name,
+      tag: tag,
       games: [],
     };
 
@@ -34,7 +35,10 @@ async function main() {
   }
 
   console.log("creating roms data json");
-  fs.writeFileSync("data/myrient-list-roms.json", JSON.stringify(data, null, "  "));
+  fs.writeFileSync(
+    "data/myrient-list-roms.json",
+    JSON.stringify(data, null, "  ")
+  );
   console.log("roms data json created");
 
   console.log("end");

@@ -1,6 +1,5 @@
 import fs from "fs/promises";
 import romsJson from "./data/myrient-list-roms.json" assert { type: "json" };
-import cmdsJson from "./data/myrient-cmd.json" assert { type: "json" };
 
 let groupId = 1;
 let collectionId = 1;
@@ -38,12 +37,13 @@ async function main() {
         id: appId,
         name: title,
         collections: [collectionId],
+        tags: [myrientConsole.tag],
         links: [],
       };
       appId += 1;
 
       const games = myrientConsole.games.filter(({ name }) =>
-        name.startsWith(title)
+        name.startsWith(`${title} (`)
       );
       for (const game of games) {
         console.log(`[${game.name}] adding links to app ${app.name}`);
@@ -56,21 +56,21 @@ async function main() {
   }
 
   console.log("creating group");
-  await mkdir("data/groups");
+  await mkdir("../data/groups");
   await fs.writeFile(
-    "data/groups/consoles.json",
+    "../data/groups/consoles.json",
     JSON.stringify(group, null, "  ")
   );
   console.log("creating apps");
-  await mkdir("data/apps");
+  await mkdir("../data/apps");
   for (const app of apps) {
     console.log(`[${app.collections[0]}] creating app ${app.name}`);
 
     const letter = getLetterFolder(app.name);
     const name = normalizeStr(app.name);
-    await mkdir(`data/apps/${letter}`);
+    await mkdir(`../data/apps/${letter}`);
     await fs.writeFile(
-      `data/apps/${letter}/${name}.json`,
+      `../data/apps/${letter}/${name}.json`,
       JSON.stringify(app, null, "  ")
     );
   }

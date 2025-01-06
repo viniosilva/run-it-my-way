@@ -1,70 +1,70 @@
 {
   "collections": {
-    "1": {
+    "a26": {
       "cmd": "flatpak run org.libretro.RetroArch -L  ~/.var/app/org.libretro.RetroArch/config/retroarch/cores/stella_libretro.so"
     },
-    "2": {
+    "a52": {
       "cmd": "flatpak run org.libretro.RetroArch -L  ~/.var/app/org.libretro.RetroArch/config/retroarch/cores/atari800_libretro.so"
     },
-    "3": {
+    "a78": {
       "cmd": "flatpak run org.libretro.RetroArch -L  ~/.var/app/org.libretro.RetroArch/config/retroarch/cores/prosystem_libretro.so"
     },
-    "4": {
+    "ngp": {
       "cmd": "flatpak run org.libretro.RetroArch -L  ~/.var/app/org.libretro.RetroArch/config/retroarch/cores/mednafen_ngp_libretro.so"
     },
-    "5": {
+    "n64": {
       "cmd": "flatpak run org.libretro.RetroArch -L  ~/.var/app/org.libretro.RetroArch/config/retroarch/cores/mupen64plus_next_libretro.so"
     },
-    "6": {
+    "nds": {
       "cmd": "flatpak run org.libretro.RetroArch -L  ~/.var/app/org.libretro.RetroArch/config/retroarch/cores/melondsds_libretro.so"
     },
-    "7": {
+    "gb": {
       "cmd": "flatpak run org.libretro.RetroArch -L  ~/.var/app/org.libretro.RetroArch/config/retroarch/cores/mgba_libretro.so"
     },
-    "8": {
+    "nes": {
       "cmd": "flatpak run org.libretro.RetroArch -L  ~/.var/app/org.libretro.RetroArch/config/retroarch/cores/mesen_libretro.so"
     },
-    "9": {
+    "gba": {
       "cmd": "flatpak run org.libretro.RetroArch -L  ~/.var/app/org.libretro.RetroArch/config/retroarch/cores/mgba_libretro.so"
     },
-    "10": {
+    "gbc": {
       "cmd": "flatpak run org.libretro.RetroArch -L  ~/.var/app/org.libretro.RetroArch/config/retroarch/cores/mgba_libretro.so"
     },
-    "11": {
+    "gc": {
       "cmd": "flatpak run org.DolphinEmu.dolphin-emu -e",
       "unzip_ext": "rvz"
     },
-    "12": {
+    "wii": {
       "cmd": "flatpak run org.DolphinEmu.dolphin-emu -e",
       "unzip_ext": "rvz"
     },
-    "13": { "cmd": "flatpak run info.cemu.Cemu -g" },
-    "14": {
+    "wiiu": { "cmd": "flatpak run info.cemu.Cemu -g" },
+    "dc": {
       "cmd": "flatpak run org.libretro.RetroArch -L  ~/.var/app/org.libretro.RetroArch/config/retroarch/cores/flycast_libretro.so"
     },
-    "15": {
+    "ms": {
       "cmd": "flatpak run org.libretro.RetroArch -L  ~/.var/app/org.libretro.RetroArch/config/retroarch/cores/genesis_plus_gx_wide_libretro.so"
     },
-    "16": {
+    "md": {
       "cmd": "flatpak run org.libretro.RetroArch -L  ~/.var/app/org.libretro.RetroArch/config/retroarch/cores/genesis_plus_gx_wide_libretro.so"
     },
-    "17": {
+    "sat": {
       "cmd": "flatpak run org.libretro.RetroArch -L  ~/.var/app/org.libretro.RetroArch/config/retroarch/cores/mednafen_saturn_libretro.so"
     },
-    "18": {
+    "psx": {
       "cmd": "flatpak run org.libretro.RetroArch -L  ~/.var/app/org.libretro.RetroArch/config/retroarch/cores/pcsx_rearmed_libretro.so"
     },
-    "19": {
+    "ps2": {
       "cmd": "flatpak run net.pcsx2.PCSX2",
       "unzip_ext": "bin"
     },
-    "20": { "cmd": "flatpak run net.rpcs3.RPCS3" },
-    "21": {
+    "ps3": { "cmd": "flatpak run net.rpcs3.RPCS3" },
+    "psp": {
       "cmd": "flatpak run org.libretro.RetroArch -L  ~/.var/app/org.libretro.RetroArch/config/retroarch/cores/ppsspp_libretro.so",
       "unzip_ext": "iso"
     },
-    "22": "",
-    "23": {
+    "psv": "",
+    "snes": {
       "cmd": "flatpak run org.libretro.RetroArch -L  ~/.var/app/org.libretro.RetroArch/config/retroarch/cores/snes9x_libretro.so"
     }
   }

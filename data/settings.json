@@ -32,11 +32,11 @@
     },
     "11": {
       "cmd": "flatpak run org.DolphinEmu.dolphin-emu -e",
-      "unzip": "file"
+      "unzip_ext": "rvz"
     },
     "12": {
       "cmd": "flatpak run org.DolphinEmu.dolphin-emu -e",
-      "unzip": "file"
+      "unzip_ext": "rvz"
     },
     "13": { "cmd": "flatpak run info.cemu.Cemu -g" },
     "14": {
@@ -55,11 +55,13 @@
       "cmd": "flatpak run org.libretro.RetroArch -L  ~/.var/app/org.libretro.RetroArch/config/retroarch/cores/pcsx_rearmed_libretro.so"
     },
     "19": {
-      "cmd": "flatpak run org.libretro.RetroArch -L  ~/.var/app/org.libretro.RetroArch/config/retroarch/cores/pcsx2_libretro.so"
+      "cmd": "flatpak run net.pcsx2.PCSX2",
+      "unzip_ext": "bin"
     },
     "20": { "cmd": "flatpak run net.rpcs3.RPCS3" },
     "21": {
-      "cmd": "flatpak run org.libretro.RetroArch -L  ~/.var/app/org.libretro.RetroArch/config/retroarch/cores/ppsspp_libretro.so"
+      "cmd": "flatpak run org.libretro.RetroArch -L  ~/.var/app/org.libretro.RetroArch/config/retroarch/cores/ppsspp_libretro.so",
+      "unzip_ext": "iso"
     },
     "22": "",
     "23": {

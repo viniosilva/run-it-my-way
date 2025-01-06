@@ -121,20 +121,30 @@ async function download(link, filePath) {
   file.write(Buffer.from(buffer));
 }
 
-async function unzip(filePath) {
+async function unzip(filePath, ext) {
   const data = await fs.promises.readFile(filePath);
-
   const { files } = await zip.loadAsync(data);
-  const file = Object.values(files).shift();
-  const buffer = await file.async("nodebuffer");
 
-  const dir = filePath.split("/").slice(0, -1).join("/");
-  const filename = normalizeString(file.name);
-  const unzipFilePath = path.join(dir, filename);
+  const separator = files.length == 1 ? "/" : ".";
+  const dir = normalizeString(
+    filePath.split(separator).slice(0, -1).join(separator)
+  );
+  await fs.promises.mkdir(dir, { recursive: true });
 
-  await fs.promises.writeFile(unzipFilePath, buffer);
+  let unzippedFile = "";
 
-  return unzipFilePath;
+  for (const f of Object.values(files)) {
+    const buffer = await f.async("nodebuffer");
+    const filename = normalizeString(f.name);
+    const unzippedFilePath = path.join(dir, filename);
+    await fs.promises.writeFile(unzippedFilePath, buffer);
+
+    if (filename.endsWith(`.${ext}`)) {
+      unzippedFile = unzippedFilePath;
+    }
+  }
+
+  return unzippedFile;
 }
 
 module.exports = {

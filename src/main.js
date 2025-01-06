@@ -30,7 +30,7 @@ async function createWindow() {
   win.loadFile("src/view/collections/index.html");
   win.once("ready-to-show", () => {
     win.setFullScreen(true);
-    // win.webContents.openDevTools();
+    win.webContents.openDevTools();
   });
 }
 

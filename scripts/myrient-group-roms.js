@@ -37,7 +37,6 @@ async function main() {
       const app = {
         id: appId,
         name: title,
-        cmd: `${cmdsJson[myrientConsole.name]} \{FILE_PATH\}`,
         collections: [collectionId],
         links: [],
       };

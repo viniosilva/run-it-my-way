@@ -46,12 +46,12 @@ async function importApp(_, appId, link) {
     const settings = getAppSettingsByCollection(app);
     if (!settings) return;
 
+    await fs.promises.mkdir(letterPath, { recursive: true });
     if (!(await exists(filePath, { withoutExt: true }))) {
-      await fs.promises.mkdir(letterPath, { recursive: true });
       await download(link, filePath);
 
-      if (settings.unzip) {
-        const zipFile = await unzip(filePath);
+      if (settings.unzip_ext) {
+        const zipFile = await unzip(filePath, settings.unzip_ext);
         await fs.promises.rm(filePath);
         filePath = zipFile;
       }

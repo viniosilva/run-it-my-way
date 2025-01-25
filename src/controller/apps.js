@@ -24,6 +24,8 @@ function getAppById(_, id) {
 
 function run(_, appId) {
   const app = vars.apps.find(({ id }) => id === appId);
+  if (!app.cmd) return;
+
   exec(encodeCommand(app.cmd));
 }
 
@@ -65,8 +67,8 @@ async function importApp(_, appId, link) {
 }
 
 function getAppSettingsByCollection(app) {
-  for (const c of app.collections) {
-    const cmd = vars.settings.collections[c];
+  for (const tag of app.tags) {
+    const cmd = vars.settings.collections[tag];
     if (cmd) return cmd;
   }
   return null;

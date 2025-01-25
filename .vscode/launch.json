@@ -3,7 +3,7 @@
   "configurations": [
     {
       "name": "Launch Program",
-      "program": "${workspaceFolder}/zipping.js",
+      "program": "${workspaceFolder}/scripts/myrient-group-roms.js",
       "request": "launch",
       "skipFiles": ["<node_internals>/**"],
       "type": "node"

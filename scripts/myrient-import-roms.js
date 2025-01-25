@@ -1,7 +1,7 @@
 import fs from "fs";
 import got from "got";
 import jsdom from "jsdom";
-import linksJson from "./data/myrient-links.json" assert { type: "json" };
+import linksJson from "./config/myrient-links.json" assert { type: "json" };
 
 const { JSDOM } = jsdom;
 

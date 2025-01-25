@@ -1,5 +1,3 @@
-data/apps/
-data/files/
-data/groups/
-myrient-list-roms.json
+data
+scripts/data
 node_modules/

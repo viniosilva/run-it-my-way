@@ -6,6 +6,7 @@ const zip = new require("jszip");
 const rootPath = electron.app.getAppPath();
 
 const dataFolder = path.join(rootPath, "data");
+const configFolder = path.join(rootPath, "config");
 const groupsFolder = path.join(dataFolder, "groups");
 const appsFolder = path.join(dataFolder, "apps");
 
@@ -42,6 +43,7 @@ async function readApps() {
   const dirs = await fs.promises.readdir(appsFolder);
   const apps = [];
 
+  let id = 1;
   for (const dir of dirs) {
     const contents = await fs.promises.readdir(path.join(appsFolder, dir));
 
@@ -52,7 +54,10 @@ async function readApps() {
       );
 
       const appObj = JSON.parse(file);
+      appObj.id = id;
       apps.push(appObj);
+
+      id += 1;
     }
   }
 
@@ -61,7 +66,7 @@ async function readApps() {
 
 async function readSettings() {
   const file = await fs.promises.readFile(
-    path.join(dataFolder, "settings.json"),
+    path.join(configFolder, "settings.json"),
     "utf-8"
   );
 

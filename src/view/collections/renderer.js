@@ -2,6 +2,11 @@ class CollectionScreen {
   tabindex = "1";
   mapCommandsUp = {
     [COMMAND.MENU]: () => this.menuContainer.activate(),
+    [COMMAND.SELECT]: () => {
+      document.querySelector("#collections  > ul li:focus")?.click();
+    },
+  };
+  mapCommandsDown = {
     [COMMAND.LEFT]: () => {
       const items = Array.from(
         document.querySelectorAll("#collections > ul li")
@@ -15,9 +20,6 @@ class CollectionScreen {
       );
       const item = focusItem(items, 1);
       this.tabindex = item.getAttribute("tabindex");
-    },
-    [COMMAND.SELECT]: () => {
-      document.querySelector("#collections  > ul li:focus")?.click();
     },
   };
 
@@ -64,6 +66,8 @@ class CollectionScreen {
 
     if (eventKey === EVENT_KEY.UP) {
       this.mapCommandsUp[cmd] && this.mapCommandsUp[cmd]();
+    } else if (eventKey === EVENT_KEY.DOWN) {
+      this.mapCommandsDown[cmd] && this.mapCommandsDown[cmd]();
     }
   }
 

@@ -1,9 +1,10 @@
 import fs from "fs/promises";
 import romsJson from "./data/myrient-list-roms.json" assert { type: "json" };
+import denyListJson from "./config/deny-list.json" assert { type: "json" };
 
+const denyRegexes = denyListJson.map((d) => new RegExp(d, "ig"));
 let groupId = 1;
 let collectionId = 1;
-let appId = 1;
 
 async function main() {
   console.log("starting");
@@ -23,24 +24,26 @@ async function main() {
     group.collections.push({
       id: collectionId,
       name: myrientConsole.name,
-      img: "",
+      tag: myrientConsole.tag
     });
 
     const titles = Array.from(
       new Set(myrientConsole.games.map(({ name }) => getAppName(name)))
-    );
+    ).filter((t) => !denyRegexes.some(re => t.match(re)))
+
+    if (titles.find((t) => t === "[BIOS] Mega-CD 2")) {
+      console.log("hi");
+    }
 
     for (const title of titles) {
       console.log(`[${myrientConsole.name}] getting app ${title}`);
 
       const app = {
-        id: appId,
         name: title,
         collections: [collectionId],
         tags: [myrientConsole.tag],
         links: [],
       };
-      appId += 1;
 
       const games = myrientConsole.games.filter(({ name }) =>
         name.startsWith(`${title} (`)
@@ -63,11 +66,12 @@ async function main() {
   );
   console.log("creating apps");
   await mkdir("../data/apps");
+
   for (const app of apps) {
     console.log(`[${app.collections[0]}] creating app ${app.name}`);
 
     const letter = getLetterFolder(app.name);
-    const name = normalizeStr(app.name);
+    const name = `${normalizeStr(app.name)}_${app.tags[0]}`;
     await mkdir(`../data/apps/${letter}`);
     await fs.writeFile(
       `../data/apps/${letter}/${name}.json`,

@@ -101,6 +101,7 @@ class OptionsContainer {
   tabindex = "1";
   mapCommandsUp = {
     [COMMAND.OPTIONS]: () => this.activate(),
+    [COMMAND.MENU]: () => this.activate(),
     [COMMAND.SELECT]: () => {
       document.querySelector("#options > ul li:focus")?.click();
     },

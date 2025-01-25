@@ -1,0 +1,122 @@
+[
+  {
+    "name": "PC",
+    "url": "",
+    "tag": "pc"
+  },
+  {
+    "name": "Atari 2600",
+    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%202600",
+    "tag": "a26"
+  },
+  {
+    "name": "Atari 5200",
+    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%205200",
+    "tag": "a52"
+  },
+  {
+    "name": "Nintendo Entertainment System (NES)",
+    "url": "https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Nintendo%20Entertainment%20System%20(Headered)",
+    "tag": "nes"
+  },
+  {
+    "name": "Sega Master System",
+    "url": "https://myrient.erista.me/files/No-Intro/Sega%20-%20Master%20System%20-%20Mark%20III",
+    "tag": "ms"
+  },
+  {
+    "name": "Atari 7800",
+    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%207800",
+    "tag": "a78"
+  },
+  {
+    "name": "Sega Mega Drive",
+    "url": "https://myrient.erista.me/files/No-Intro/Sega%20-%20Mega%20Drive%20-%20Genesis",
+    "tag": "md"
+  },
+  {
+    "name": "Nintendo Game Boy",
+    "url": "https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy",
+    "tag": "gb"
+  },
+  {
+    "name": "Super Nintendo (SNES)",
+    "url": "https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Super%20Nintendo%20Entertainment%20System",
+    "tag": "snes"
+  },
+  {
+    "name": "Sega Saturn",
+    "url": "https://myrient.erista.me/files/Internet%20Archive/chadmaster/chd_saturn/CHD-Saturn/USA",
+    "tag": "sat"
+  },
+  {
+    "name": "Sony Playstation",
+    "url": "https://myrient.erista.me/files/Redump/Sony%20-%20PlayStation",
+    "tag": "psx"
+  },
+  {
+    "name": "Nintendo 64",
+    "url": "https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Nintendo%2064%20(ByteSwapped)",
+    "tag": "n64"
+  },
+  {
+    "name": "Nintendo Game Boy Color",
+    "url": "https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Color",
+    "tag": "gbc"
+  },
+  {
+    "name": "Sega Dreamcast",
+    "url": "https://myrient.erista.me/files/Redump/Sega%20-%20Dreamcast",
+    "tag": "dc"
+  },
+  {
+    "name": "NeoGeo Pocket Color",
+    "url": "https://myrient.erista.me/files/No-Intro/SNK%20-%20NeoGeo%20Pocket%20Color/",
+    "tag": "ngp"
+  },
+  {
+    "name": "Sony Playstation 2",
+    "url": "https://myrient.erista.me/files/Redump/Sony%20-%20PlayStation%202",
+    "tag": "ps2"
+  },
+  {
+    "name": "Nintendo Game Boy Advance",
+    "url": "https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Advance",
+    "tag": "gba"
+  },
+  {
+    "name": "Nintendo GameCube",
+    "url": "https://myrient.erista.me/files/Redump/Nintendo%20-%20GameCube%20-%20NKit%20RVZ%20[zstd-19-128k]",
+    "tag": "gc"
+  },
+  {
+    "name": "Nintendo DS",
+    "url": "https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Nintendo%20DS%20(Decrypted)",
+    "tag": "nds"
+  },
+  {
+    "name": "Sony Playstation Portable",
+    "url": "https://myrient.erista.me/files/Redump/Sony%20-%20PlayStation%20Portable",
+    "tag": "psp"
+  },
+  {
+    "name": "Nintendo Wii",
+    "url": "https://myrient.erista.me/files/Redump/Nintendo%20-%20Wii%20-%20NKit%20RVZ%20[zstd-19-128k]",
+    "tag": "wii"
+  },
+  {
+    "name": "Sony Playstation 3",
+    "url": "https://myrient.erista.me/files/No-Intro/Sony%20-%20PlayStation%203%20(PSN)%20(Content)",
+    "tag": "ps3"
+  },
+  {
+    "name": "Sony Playstation Vita",
+    "url": "https://myrient.erista.me/files/No-Intro/Sony%20-%20PlayStation%20Vita%20(PSN)%20(Content)",
+    "tag": "psv"
+  },
+  {
+    "name": "Nintendo Wii U",
+    "url": "https://myrient.erista.me/files/Redump/Nintendo%20-%20Wii%20U%20-%20WUX",
+    "tag": "wiiu"
+  }
+]
